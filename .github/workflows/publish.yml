@@ -20,8 +20,22 @@ jobs:
           # TODO: build from sources
     steps:
       - run: wget https://github.com/Z3Prover/z3/releases/download/z3-4.8.10/z3-4.8.10-${{ matrix.target.file }}.zip
-      - run: mv z3-4.8.10-${{ matrix.target.file }}.zip z3-${{ out }}.zip
+      - run: mv z3-4.8.10-${{ matrix.target.file }}.zip z3-${{ matrix.target.out }}.zip
       - uses: actions/upload-artifact@v2
         with:
-          name: z3-${{ out }}
-          path: ./z3-${{ out }}.zip
+          name: z3-${{ matrix.target.out }}
+          path: ./z3-${{ matrix.target.out }}.zip
+
+  build-z3-node:
+    strategy:
+      matrix:
+        os:
+          - macos-latest
+          - ubuntu-latest
+          - windows-latest
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: z3-${{ matrix.os }}
