@@ -13,5 +13,3 @@ const FILE_TABLE = {
 const zip = new AdmZip(Path.join(__dirname, '..', `z3-${FILE_TABLE[OS.platform()]}.zip`));
 Fs.mkdirSync(Path.join(__dirname, '..', 'z3'))
 zip.extractAllTo(Path.join(__dirname, '..', 'z3'), true);
-
-

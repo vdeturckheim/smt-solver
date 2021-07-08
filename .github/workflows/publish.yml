@@ -46,7 +46,6 @@ jobs:
       - run: npm install
       - run: ls
       - run: node scripts/unzip.cjs
-      - run: ls
-      - run: ls *
-      - run: ls z3/bin
-      - run: ls z3/include
+      - run: mv z3/z3-4.8.10-* z3/4.8.10
+      - run: ls z3/4.8.10
+      - run: ls z3/4.8.10/*
