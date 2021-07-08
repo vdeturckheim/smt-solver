@@ -40,9 +40,11 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: z3-${{ matrix.os }}
-      - uses: TonyBogdanov/zip@1.0
+      - uses: actions/setup-node@v2
         with:
-          args: unzip -qq z3-${{ matrix.os }} -d ./z3
+          node-version: '14'
+      - run: npm install
+      - run: node scripts/unzip.js
       - run: ls
       - run: ls *
       - run: ls z3/bin

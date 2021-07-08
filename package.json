@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/vdeturckheim/smt-solver/issues"
   },
-  "homepage": "https://github.com/vdeturckheim/smt-solver#readme"
+  "homepage": "https://github.com/vdeturckheim/smt-solver#readme",
+  "devDependencies": {
+    "adm-zip": "^0.5.5"
+  }
 }
