@@ -1,0 +1,23 @@
+{
+  "name": "smt-solver",
+  "version": "0.0.0",
+  "description": "Node.js SMT solvers",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vdeturckheim/smt-solver.git"
+  },
+  "author": "vdturckheim",
+  "license": "MIT",
+  "engines": {
+    "node": ">= 16.x"
+  },
+  "bugs": {
+    "url": "https://github.com/vdeturckheim/smt-solver/issues"
+  },
+  "homepage": "https://github.com/vdeturckheim/smt-solver#readme"
+}
