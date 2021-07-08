@@ -45,3 +45,4 @@ jobs:
           args: unzip -qq z3-${{ matrix.os }} -d ./z3
       - run: ls
       - run: ls *
+      - run: ls z3/*
