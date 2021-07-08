@@ -11,8 +11,8 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
-#          - macos-latest
-#          - windows-latest
+          - macos-latest
+          - windows-latest
           # TODO: alpine builds somedays
     runs-on: ${{ matrix.os }}
     steps:
@@ -20,11 +20,12 @@ jobs:
         with:
           repository: 'Z3Prover/z3'
           ref: 'z3-4.8.10'
-      - run: ls ${{ github.workspace }}
-      - run: cmake make_directory ${{ github.workspace }}/build
+      - run: mkdir ${{ github.workspace }}/build
       - run: cmake -DCMAKE_BUILD_TYPE=Release -G "CodeBlocks - Unix Makefiles" ${{ github.workspace }}
         working-directory: ${{ github.workspace }}/build
       - run: cmake --build . --target api -- -j 6
         working-directory: ${{ github.workspace }}/build
       - run: ls -l *
         working-directory: ${{ github.workspace }}/build
+      - run: ls -l ${{ github.workspace }}/build
+      - run: ls -l ${{ github.workspace }}
