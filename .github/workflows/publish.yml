@@ -6,26 +6,15 @@ on:
     branches: [ main ]
 
 jobs:
-  build-z3:
+  download-z3:
+    runs-on: ubuntu-latest
     strategy:
       matrix:
-        os:
-#          - ubuntu-latest
-          - macos-latest
-#          - windows-latest
-          # TODO: alpine builds somedays
-    runs-on: ${{ matrix.os }}
+        target:
+          - x64-osx-10-15-7
+          - x64-ubuntu-18.04
+          - x64-win
+          # TODO: build from sources
     steps:
-      - uses: actions/checkout@v2
-        with:
-          repository: 'Z3Prover/z3'
-          ref: 'z3-4.8.10'
-      - run: mkdir ${{ github.workspace }}/build
-      - run: cmake -DCMAKE_BUILD_TYPE=Release -G "CodeBlocks - Unix Makefiles" ${{ github.workspace }}
-        working-directory: ${{ github.workspace }}/build
-      - run: cmake --build . --target api -- -j 6
-        working-directory: ${{ github.workspace }}/build
-      - run: ls -l *
-        working-directory: ${{ github.workspace }}/build
-      - run: ls -l ${{ github.workspace }}/build
-      - run: ls -l ${{ github.workspace }}
+      - run: wget https://github.com/Z3Prover/z3/releases/download/z3-4.8.10/z3-4.8.10-${{ matrix.target }}.zip
+      - run: ls -l
