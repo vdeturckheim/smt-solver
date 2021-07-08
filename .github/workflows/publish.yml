@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         target:
-          - x64-osx-10-15-7
+          - x64-osx-10.15.7
           - x64-ubuntu-18.04
           - x64-win
           # TODO: build from sources
