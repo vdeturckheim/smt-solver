@@ -20,4 +20,6 @@ jobs:
         with:
           repository: 'Z3Prover/z3'
           ref: 'z3-4.8.10'
+      - run: cmake -DCMAKE_BUILD_TYPE=Release -G "CodeBlocks - Unix Makefiles" .
+      - run: cmake --build . --target api -- -j 6
       - run: ls -l *
