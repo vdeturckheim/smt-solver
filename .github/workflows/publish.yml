@@ -11,8 +11,8 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
-          - macos-latest
-          - windows-latest
+#          - macos-latest
+#          - windows-latest
           # TODO: alpine builds somedays
     runs-on: ${{ matrix.os }}
     steps:
@@ -20,3 +20,4 @@ jobs:
         with:
           repository: 'Z3Prover/z3'
           ref: 'z3-4.8.10'
+      - run: ls -l *
