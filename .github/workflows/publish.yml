@@ -39,3 +39,8 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: z3-${{ matrix.os }}
+      - uses: TonyBogdanov/zip@1.0
+        with:
+          args: unzip -qq z3-${{ matrix.os }} -d ./z3
+      - run: ls
+      - run: ls *
