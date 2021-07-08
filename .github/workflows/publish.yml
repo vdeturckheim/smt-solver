@@ -45,4 +45,5 @@ jobs:
           args: unzip -qq z3-${{ matrix.os }} -d ./z3
       - run: ls
       - run: ls *
-      - run: ls z3/*
+      - run: ls z3/bin
+      - run: ls z3/include
