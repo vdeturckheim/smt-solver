@@ -27,6 +27,7 @@ jobs:
           path: ./z3-${{ matrix.target.out }}.zip
 
   build-z3-node:
+    needs: get-z3
     strategy:
       matrix:
         os:
