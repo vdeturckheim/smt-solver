@@ -6,15 +6,22 @@ on:
     branches: [ main ]
 
 jobs:
-  download-z3:
+  get-z3:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         target:
-          - x64-osx-10.15.7
-          - x64-ubuntu-18.04
-          - x64-win
+          - file: x64-osx-10.15.7
+            out: macos-latest
+          - file: x64-ubuntu-18.04
+            out: ubuntu-latest
+          - file: x64-win
+            out: windows-latest
           # TODO: build from sources
     steps:
-      - run: wget https://github.com/Z3Prover/z3/releases/download/z3-4.8.10/z3-4.8.10-${{ matrix.target }}.zip
-      - run: ls -l
+      - run: wget https://github.com/Z3Prover/z3/releases/download/z3-4.8.10/z3-4.8.10-${{ matrix.target.file }}.zip
+      - run: mv z3-4.8.10-${{ matrix.target.file }}.zip z3-${{ out }}.zip
+      - uses: actions/upload-artifact@v2
+        with:
+          name: z3-${{ out }}
+          path: ./z3-${{ out }}.zip
