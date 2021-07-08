@@ -44,7 +44,7 @@ jobs:
         with:
           node-version: '14'
       - run: npm install
-      - run: node scripts/unzip.js
+      - run: node scripts/unzip.cjs
       - run: ls
       - run: ls *
       - run: ls z3/bin
