@@ -20,7 +20,7 @@ jobs:
         with:
           repository: 'Z3Prover/z3'
           ref: 'z3-4.8.10'
-      - run: mkdir ${{ github.workspace }}/build
+      - run: cmake make_directory ${{ github.workspace }}/build
       - run: cmake -DCMAKE_BUILD_TYPE=Release -G "CodeBlocks - Unix Makefiles" ${{ github.workspace }}
         working-directory: ${{ github.workspace }}/build
       - run: cmake --build . --target api -- -j 6
