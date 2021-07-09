@@ -44,8 +44,4 @@ jobs:
         with:
           node-version: '14'
       - run: npm install
-      - run: ls
-      - run: node scripts/unzip.cjs
-      - run: mv z3/z3-4.8.10-* z3/4.8.10
-      - run: ls z3/4.8.10
-      - run: ls z3/4.8.10/*
+      - run: npm run rebuild
