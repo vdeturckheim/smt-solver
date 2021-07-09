@@ -72,7 +72,7 @@ jobs:
         with:
           node-version: '16'
       - run: rm binding.gyp
-      - run: ls ./built/*
+      - run: ls -l ./built/*
       - run: npm install
 #      - run: mv z3.node
 #      - run: npm
