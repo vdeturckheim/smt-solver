@@ -33,7 +33,7 @@ jobs:
         os:
           - macos-latest
           - ubuntu-latest
-          - windows-latest
+#          - windows-latest TODO: fix Windows builds
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
