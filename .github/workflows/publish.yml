@@ -45,6 +45,7 @@ jobs:
           node-version: '14'
       - run: npm install --ignore-scripts
       - run: node scripts/unzip.cjs
+      - run: mv z3/z3-4.8.10-* z3/4.8.10/
       - run: ls
       - run: ls z3
       - run: ls z3/*
