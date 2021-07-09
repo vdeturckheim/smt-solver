@@ -43,10 +43,11 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
+      - run: npm install --ignore-scripts
       - run: node scripts/unzip.cjs
-      - run: node -p "require('path').join(process.cwd(), 'z3/4.8.10/include')"
-      - run: ls
-      - run: ls *
-      - run: ls z3/4.8.10
       - run: npm install
+#      - run: node -p "require('path').join(process.cwd(), 'z3/4.8.10/include')"
+#      - run: ls
+#      - run: ls *
+#      - run: ls z3/4.8.10
 #      - run: npm run rebuild
