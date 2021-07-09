@@ -44,7 +44,7 @@ jobs:
         with:
           node-version: '16'
       - run: npm install --ignore-scripts
-      - run: node scripts/unzip.cjs
+      - run: node scripts/unzip.cjs z3-${{ matrix.os }}.zip z3/
       - run: mv z3/z3-4.8.10-* z3/4.8.10/
       - run: npm install node-addon-api@4 node-gyp@8
       - run: ./node_modules/.bin/node-gyp rebuild
@@ -53,7 +53,7 @@ jobs:
           name: z3-node-${{ matrix.os }}
           path: build/Release/z3.node
 
-  test-and-publish:
+  test-and-prebuild:
     needs: build-z3-node
     strategy:
       matrix:
@@ -72,5 +72,7 @@ jobs:
           node-version: '16'
       - run: rm binding.gyp
       - run: npm install
+      - run: mkdir built
+      - run:
 #      - run: npm
 

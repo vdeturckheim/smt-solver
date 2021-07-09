@@ -1,15 +1,13 @@
 'use strict';
 const AdmZip = require('adm-zip');
 const Path = require('path');
-const OS = require('os');
 const Fs = require('fs');
 
-const FILE_TABLE = {
-    linux: 'ubuntu-latest',
-    darwin: 'macos-latest',
-    win32: 'windows-latest'
-};
+const target = process.argv.pop();
+const origin = process.argv.pop();
 
-const zip = new AdmZip(Path.join(__dirname, '..', `z3-${FILE_TABLE[OS.platform()]}.zip`));
-Fs.mkdirSync(Path.join(__dirname, '..', 'z3'))
-zip.extractAllTo(Path.join(__dirname, '..', 'z3'), true);
+const dir = Path.dirname(target);
+Fs.mkdirSync(dir, { recursive: true });
+
+const zip = new AdmZip(origin);
+zip.extractAllTo(target, true);
