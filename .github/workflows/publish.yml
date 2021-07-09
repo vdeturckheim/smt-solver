@@ -73,7 +73,7 @@ jobs:
       - run: rm binding.gyp
       - run: npm install
       - run: mkdir built
-      - run: node unzip z3-node-${{ matrix.os }}.zip .
+      - run: node scripts/unzip z3-node-${{ matrix.os }}.zip .
       - run: ls
       - run: ls *
 #      - run: npm
