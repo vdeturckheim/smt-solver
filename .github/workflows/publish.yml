@@ -1,0 +1,101 @@
+name: Build and pre-publish
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+
+jobs:
+  get-z3:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        target:
+          - file: x64-osx-10.15.7
+            out: macos-latest
+          - file: x64-ubuntu-18.04
+            out: ubuntu-latest
+          - file: x64-win
+            out: windows-latest
+          # TODO: build from sources
+    steps:
+      - run: wget https://github.com/Z3Prover/z3/releases/download/z3-4.8.10/z3-4.8.10-${{ matrix.target.file }}.zip
+      - run: mv z3-4.8.10-${{ matrix.target.file }}.zip z3-${{ matrix.target.out }}.zip
+      - uses: actions/upload-artifact@v2
+        with:
+          name: z3-${{ matrix.target.out }}
+          path: ./z3-${{ matrix.target.out }}.zip
+
+  build-z3-node:
+    needs: get-z3
+    strategy:
+      matrix:
+        os:
+          - macos-latest
+          - ubuntu-latest
+#          - windows-latest TODO: fix Windows builds
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: z3-${{ matrix.os }}
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - run: npm install --ignore-scripts
+      - run: node scripts/unzip.cjs z3-${{ matrix.os }}.zip z3/
+      - run: mv z3/z3-4.8.10-* z3/4.8.10/
+      - run: npm install node-addon-api@4 node-gyp@8
+      - run: ./node_modules/.bin/node-gyp rebuild
+      - uses: actions/upload-artifact@v2
+        with:
+          name: z3-node-${{ matrix.os }}
+          path: build/Release/z3.node
+
+  test:
+    needs: build-z3-node
+    strategy:
+      matrix:
+        os:
+          - macos-latest
+          - ubuntu-latest
+      #          - windows-latest TODO: fix Windows builds
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: z3-node-${{ matrix.os }}
+          path: ./built/${{ matrix.os }}/
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - run: rm binding.gyp
+      - run: ls -l ./built
+      - run: ls -l ./built/*
+      - run: ls -l ./built/${{ matrix.os }}/
+      - run: npm install
+      - run: npm test
+  pre-publish:
+    needs: build-z3-node
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: z3-node-macos-latest
+          path: ./built/macos-latest/
+      - uses: actions/download-artifact@v2
+        with:
+          name: z3-node-ubuntu-latest
+          path: ./built/ubuntu-latest/
+#      - uses: actions/download-artifact@v2
+#        with:
+#          name: z3-node-windows-latest
+#          path: ./built/windows-latest/
+      - uses: actions/upload-artifact@v2
+        with:
+          name: z3-node
+          path: ./built
