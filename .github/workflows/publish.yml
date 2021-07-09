@@ -47,7 +47,7 @@ jobs:
       - run: node scripts/unzip.cjs
       - run: mv z3/z3-4.8.10-* z3/4.8.10/
       - run: npm install
-      - run: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v2
         with:
           name: z3-${ matrix.os }
           path: build/Release/z3.node
