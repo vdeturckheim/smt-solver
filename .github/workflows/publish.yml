@@ -45,6 +45,10 @@ jobs:
           node-version: '14'
       - run: npm install --ignore-scripts
       - run: node scripts/unzip.cjs
+      - run: ls
+      - run: ls z3
+      - run: ls z3/*
+      - run: ls z3/*/*
       - run: npm install
 #      - run: node -p "require('path').join(process.cwd(), 'z3/4.8.10/include')"
 #      - run: ls
