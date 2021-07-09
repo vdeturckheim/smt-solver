@@ -72,7 +72,9 @@ jobs:
         with:
           node-version: '16'
       - run: rm binding.gyp
+      - run: ls -l ./built
       - run: ls -l ./built/*
+      - run: ls -l ./built/${{ matrix.os }}/
       - run: npm install
 #      - run: mv z3.node
 #      - run: npm
