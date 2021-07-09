@@ -13,10 +13,10 @@ jobs:
         target:
           - file: x64-osx-10.15.7
             out: macos-latest
-          - file: x64-ubuntu-18.04
-            out: ubuntu-latest
-          - file: x64-win
-            out: windows-latest
+#          - file: x64-ubuntu-18.04
+#            out: ubuntu-latest
+#          - file: x64-win
+#            out: windows-latest
           # TODO: build from sources
     steps:
       - run: wget https://github.com/Z3Prover/z3/releases/download/z3-4.8.10/z3-4.8.10-${{ matrix.target.file }}.zip
