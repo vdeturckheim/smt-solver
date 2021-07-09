@@ -49,5 +49,5 @@ jobs:
       - run: npm install
       - uses: actions/upload-artifact@v2
         with:
-          name: z3-${ matrix.os }
+          name: z3-${{ matrix.os }}
           path: build/Release/z3.node
