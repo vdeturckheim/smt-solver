@@ -73,6 +73,6 @@ jobs:
       - run: rm binding.gyp
       - run: npm install
       - run: mkdir built
-      - run:
+#      - run:
 #      - run: npm
 
