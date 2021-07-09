@@ -37,7 +37,8 @@ Napi::Value Solve(const Napi::CallbackInfo& info) {
     return env.Null();
   }
   model mod = s.get_model();
-  return Napi::String::New(env, mod.to_string());
+  std::str strMod = mod.to_string();
+  return Napi::String::New(env, strMod);
 }
 
 Napi::Object Init(Napi::Env env, Napi::Object exports) {
