@@ -1,9 +1,10 @@
-name: Build and publish
+name: Build and pre-publish
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+
 
 jobs:
   get-z3:
@@ -77,5 +78,24 @@ jobs:
       - run: ls -l ./built/${{ matrix.os }}/
       - run: npm install
       - run: npm test
-
-
+  pre-publish:
+    needs: build-z3-node
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: z3-node-macos-latest
+          path: ./built/macos-latest/
+      - uses: actions/download-artifact@v2
+        with:
+          name: z3-node-ubuntu-latest
+          path: ./built/ubuntu-latest/
+      - uses: actions/download-artifact@v2
+        with:
+          name: z3-node-windows-latest
+          path: ./built/windows-latest/
+      - uses: actions/upload-artifact@v2
+        with:
+          name: z3-node
+          path: ./built

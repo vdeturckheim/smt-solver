@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --parallel"
   },
   "repository": {
     "type": "git",
@@ -23,5 +23,11 @@
   "devDependencies": {
     "adm-zip": "^0.5.5",
     "mocha": "^9.0.2"
-  }
+  },
+  "files": [
+    "/lib",
+    "/built",
+    "/README.md",
+    "/LICENSE"
+  ]
 }
