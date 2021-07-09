@@ -44,6 +44,8 @@ jobs:
         with:
           node-version: '14'
       - run: node -p "require('path').join(process.cwd(), 'z3/4.8.10/include')"
+      - run: ls
+      - run: ls *
       - run: ls z3/4.8.10
       - run: npm install
 #      - run: npm run rebuild
