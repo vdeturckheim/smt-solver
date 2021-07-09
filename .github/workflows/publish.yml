@@ -43,7 +43,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
-      - run: npm install
+      - run: npm install --ignore-scripts
       - run: node scripts/unzip.cjs
       - run: mv z3/z3-4.8.10-* z3/4.8.10/
       - run: npm install node-addon-api@4 node-gyp@8
