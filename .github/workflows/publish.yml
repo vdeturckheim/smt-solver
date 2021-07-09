@@ -13,10 +13,10 @@ jobs:
         target:
           - file: x64-osx-10.15.7
             out: macos-latest
-#          - file: x64-ubuntu-18.04
-#            out: ubuntu-latest
-#          - file: x64-win
-#            out: windows-latest
+          - file: x64-ubuntu-18.04
+            out: ubuntu-latest
+          - file: x64-win
+            out: windows-latest
           # TODO: build from sources
     steps:
       - run: wget https://github.com/Z3Prover/z3/releases/download/z3-4.8.10/z3-4.8.10-${{ matrix.target.file }}.zip
@@ -32,8 +32,8 @@ jobs:
       matrix:
         os:
           - macos-latest
-#          - ubuntu-latest
-#          - windows-latest
+          - ubuntu-latest
+          - windows-latest
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
@@ -46,13 +46,8 @@ jobs:
       - run: npm install --ignore-scripts
       - run: node scripts/unzip.cjs
       - run: mv z3/z3-4.8.10-* z3/4.8.10/
-      - run: ls
-      - run: ls z3
-      - run: ls z3/*
-      - run: ls z3/*/*
       - run: npm install
-#      - run: node -p "require('path').join(process.cwd(), 'z3/4.8.10/include')"
-#      - run: ls
-#      - run: ls *
-#      - run: ls z3/4.8.10
-#      - run: npm run rebuild
+      - run: actions/upload-artifact@v2
+        with:
+          name: z3-${ matrix.os }
+          path: build/Release/z3.node
