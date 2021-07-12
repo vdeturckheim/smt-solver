@@ -1,0 +1,22 @@
+name: Build and pre-publish SMTlib js parsers
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+
+jobs:
+  get-z3:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          repository: julianthome/smtlibv2-grammar
+      - run: cd src/main/resources/
+      - name: install antlr 4
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y antlr4
+      - run: antl4 -Dlanguage=JavaScript SMTLIBv2.g4
+      - run: ls *.js

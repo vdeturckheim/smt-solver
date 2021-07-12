@@ -1,4 +1,4 @@
-name: Build and pre-publish
+name: Build and pre-publish z3.node
 on:
   push:
     branches: [ main ]
