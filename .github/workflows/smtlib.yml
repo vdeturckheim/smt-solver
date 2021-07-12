@@ -13,10 +13,11 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: julianthome/smtlibv2-grammar
-      - run: cd src/main/resources/
       - name: install antlr 4
         run: |
           sudo apt-get update -y
           sudo apt-get install -y antlr4
-      - run: antlr4 -Dlanguage=JavaScript SMTLIBv2.g4
+      - run: pwd
+      - run: ls
+      - run: antlr4 -Dlanguage=JavaScript src/main/resources/SMTLIBv2.g4
       - run: ls *.js
