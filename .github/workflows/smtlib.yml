@@ -22,7 +22,7 @@ jobs:
       - run: antlr4 -Dlanguage=JavaScript src/main/resources/SMTLIBv2.g4
       - run: mkdir smtlibParser
       - run: cp src/main/resources/*.js smtlibParser/
-      - run: mv LICENCE.md smtlibParser/LICENCE=SMTLIB-PARSER.md
+      - run: mv LICENCE.md smtlibParser/LICENCE-SMTLIB-PARSER.md
       - uses: actions/upload-artifact@v2
         with:
           name: smtlib-js-parser
