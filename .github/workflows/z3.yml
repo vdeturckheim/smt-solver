@@ -1,4 +1,4 @@
-name: Build and pre-publish
+name: Build and pre-publish z3.node
 on:
   push:
     branches: [ main ]
@@ -14,14 +14,14 @@ jobs:
         target:
           - file: x64-osx-10.15.7
             out: macos-latest
-          - file: x64-ubuntu-18.04
+          - file: x64-glibc-2.31
             out: ubuntu-latest
           - file: x64-win
             out: windows-latest
           # TODO: build from sources
     steps:
-      - run: wget https://github.com/Z3Prover/z3/releases/download/z3-4.8.10/z3-4.8.10-${{ matrix.target.file }}.zip
-      - run: mv z3-4.8.10-${{ matrix.target.file }}.zip z3-${{ matrix.target.out }}.zip
+      - run: wget https://github.com/Z3Prover/z3/releases/download/z3-4.8.11/z3-4.8.11-${{ matrix.target.file }}.zip
+      - run: mv z3-4.8.11-${{ matrix.target.file }}.zip z3-${{ matrix.target.out }}.zip
       - uses: actions/upload-artifact@v2
         with:
           name: z3-${{ matrix.target.out }}
@@ -46,7 +46,7 @@ jobs:
           node-version: '16'
       - run: npm install --ignore-scripts
       - run: node scripts/unzip.cjs z3-${{ matrix.os }}.zip z3/
-      - run: mv z3/z3-4.8.10-* z3/4.8.10/
+      - run: mv z3/z3-4.8.11-* z3/4.8.11/
       - run: npm install node-addon-api@4 node-gyp@8
       - run: ./node_modules/.bin/node-gyp rebuild
       - uses: actions/upload-artifact@v2
